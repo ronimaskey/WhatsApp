@@ -4,7 +4,7 @@ import "./SidebarChat.css";
 
 function SidebarChat() {
     return (
-        <div className='SidebarChat'>
+        <div className='sidebarChat'>
             <Avatar />
             <div className='sidebarChat_info'>
                 <h2>Room name</h2> 
