@@ -13,9 +13,10 @@ mongoose.connect('connection_url', {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-})
+});
 
 app.get('/', (req,res) => res.status(200).send('hi'));
+
 
 app.post("/messages/new", (req,res) => {
     const dbMessage = req.body
@@ -28,5 +29,7 @@ app.post("/messages/new", (req,res) => {
         }
     })
 })
+
+
 
 app.listen(port, ()=>console.log(`Listening on localhost:${port}`))

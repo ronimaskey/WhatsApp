@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const whatsappSchema = mongoose.Scheme({
+const whatsappSchema = mongoose.Schema({
     message: String,
     name: String,
     timeStamp: String,
@@ -8,3 +8,4 @@ const whatsappSchema = mongoose.Scheme({
 });
 
 export default mongoose.model('messageContent', whatsappSchema);
+
