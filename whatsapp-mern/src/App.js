@@ -20,12 +20,18 @@ function App() {
       cluster: 'eu'
     });
 
-    const  channel = pusher.subscribe('messages');
-    channel.bind('my-event', function(data) {
-      alert(JSON.stringify(data));
+
+  const channel = pusher.subscribe("message");
+    channel.bind("inserted", (newMessage) => {
+      alert(JSON.stringify(newMessage));
+      setMessages([...messages, newMessage]);
     });
 
-  }, []);
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  }, [messages]);
 
   console.log(messages);
   
