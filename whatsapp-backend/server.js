@@ -18,6 +18,15 @@ const pusher = new Pusher({
   useTLS: true,
 });
 
+// middleware
+app.use(express.json());
+
+app.use((req, res, next) => {
+    res.setHeader("Access-Allow-Origin", "*");
+    res.setHeader("Access-Allow-Headers", "*");
+    next();
+});
+
 // pusher
 const db = mongoose.connection;
 
@@ -29,10 +38,22 @@ db.once("open", () => {
 
   changeStream.on("change", (change) => {
     console.log("A change occured", change);
+
+    if (change.operationType === "insert") {
+      const messageDetails = change.fullDocument;
+      pusher.trigger("message", "inserted", {
+        name: messageDetails.name,
+        message: messageDetails.message,
+        timestamp: messageDetails.timestamp,
+        received: messageDetails.received,
+      });
+    } else {
+      console.log("Error triggering Pusher");
+    }
   });
 });
 
-app.use(express.json());
+
 
 const connection_url =
   "mongodb+srv://admin:KGafnOvWv5FPBJfM@cluster0.zkfcl.mongodb.net/whatsappdb?retryWrites=true&w=majority";
