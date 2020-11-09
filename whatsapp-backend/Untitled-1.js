@@ -1,4 +1,3 @@
-
 //import express from 'express';
 //import mongoose from 'mongoose';
 //import Messages from './dbMessages.js';
@@ -20,19 +19,7 @@ mongoose.connect(connection_url, {
     useUnifiedTopology: true,
 });
 
-// api routes
-app.get("/", (req, res) => res.status(200).send("hello world"));
-
-// api routes that gives back all messages
-app.get("/messages/sync", (req, res) => {
-  Messages.find((err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(data);
-    }
-  });
-});
+app.get('/', (req,res) => res.status(200).send('hi'));
 
 
 app.post("/messages/new", (req,res) => {
