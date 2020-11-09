@@ -6,6 +6,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Messages = require("./dbMessages.js");
 const Pusher = require("pusher");
+const Cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,12 +21,7 @@ const pusher = new Pusher({
 
 // middleware
 app.use(express.json());
-
-app.use((req, res, next) => {
-    res.setHeader("Access-Allow-Origin", "*");
-    res.setHeader("Access-Allow-Headers", "*");
-    next();
-});
+app.use(cors());
 
 // pusher
 const db = mongoose.connection;
