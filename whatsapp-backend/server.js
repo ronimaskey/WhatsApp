@@ -9,7 +9,7 @@ const Pusher = require("pusher");
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 9000;
 
 const pusher = new Pusher({
   appId: "1104334",
