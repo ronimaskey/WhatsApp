@@ -23,6 +23,17 @@ const pusher = new Pusher({
 app.use(express.json());
 app.use(cors());
 
+
+// DB config
+const connection_url =
+  "mongodb+srv://admin:KGafnOvWv5FPBJfM@cluster0.zkfcl.mongodb.net/whatsappdb?retryWrites=true&w=majority";
+
+mongoose.connect(connection_url, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 // pusher
 const db = mongoose.connection;
 
@@ -49,16 +60,6 @@ db.once("open", () => {
   });
 });
 
-
-
-const connection_url =
-  "mongodb+srv://admin:KGafnOvWv5FPBJfM@cluster0.zkfcl.mongodb.net/whatsappdb?retryWrites=true&w=majority";
-
-mongoose.connect(connection_url, {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 // api routes
 app.get("/", (req, res) => res.status(200).send("hello world"));
